@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uponorflix/catalogs/catalogs/view/catalog_page.dart';
 import 'package:uponorflix/splash/splash.dart';
 
 /// Centralised GoRouter configuration for Uponorflix.
@@ -28,13 +29,13 @@ final GoRouter appRouter = GoRouter(
       path: '/catalog',
       name: RouteNames.catalog,
       pageBuilder: (context, state) =>
-          const NoTransitionPage(child: SplashPage()),
+          const NoTransitionPage(child: CatalogPage()),
       routes: [
         GoRoute(
           path: 'new',
           name: RouteNames.movieNew,
           pageBuilder: (context, state) =>
-              const MaterialPage(child: SplashPage()),
+              const MaterialPage(child: CatalogPage()),
         ),
         GoRoute(
           path: ':id/edit',
@@ -44,7 +45,7 @@ final GoRouter appRouter = GoRouter(
           pageBuilder: (context, state) {
             // final movieId = state.pathParameters['id']!;
             return const MaterialPage(
-              child: SplashPage(),
+              child: CatalogPage(),
             );
           },
         ),

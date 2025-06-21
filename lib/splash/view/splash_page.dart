@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 /// Splash screen that mimics the popular Netflix intro but re‑branded
 /// for Uponorflix.
@@ -50,9 +51,7 @@ class _SplashPageState extends State<SplashPage>
 
   void _navigateNext() {
     if (mounted) {
-      Navigator.of(
-        context,
-      ).pushReplacementNamed('/catalog'); // Change route as needed
+      context.go('/catalog'); // Change route as needed
     }
   }
 

@@ -1,0 +1,14 @@
+name: video_repository
+description: The video repository handles the data layer for the video domain, providing access to local storage or remote APIs.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.8.0
+
+dev_dependencies:
+  mocktail: ^1.0.4
+  test: ^1.26.2
+  very_good_analysis: ^9.0.0
+dependencies:
+  uuid: ^4.5.1

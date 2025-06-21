@@ -15,18 +15,5 @@ class CatalogState with _$CatalogState {
   }) = _CatalogState;
 
   @override
-  // TODO: implement errorMessage
-  String? get errorMessage => throw UnimplementedError();
-
-  @override
-  // TODO: implement hasReachedMax
-  bool get hasReachedMax => throw UnimplementedError();
-
-  @override
-  // TODO: implement status
-  CatalogStatus get status => throw UnimplementedError();
-
-  @override
-  // TODO: implement videos
-  List<VideoViewModel> get videos => throw UnimplementedError();
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }

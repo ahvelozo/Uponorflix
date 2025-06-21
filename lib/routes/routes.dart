@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uponorflix/catalogs/add_edit_video/view/add_edit_video_page.dart';
 import 'package:uponorflix/catalogs/catalogs/view/catalog_page.dart';
 import 'package:uponorflix/splash/splash.dart';
 
@@ -35,7 +36,7 @@ final GoRouter appRouter = GoRouter(
           path: 'new',
           name: RouteNames.movieNew,
           pageBuilder: (context, state) =>
-              const MaterialPage(child: CatalogPage()),
+              const MaterialPage(child: AddEditVideoPage()),
         ),
         GoRoute(
           path: ':id/edit',
@@ -43,9 +44,11 @@ final GoRouter appRouter = GoRouter(
           // Pass the movie id down to the page;
           // the page decides if it's add or edit
           pageBuilder: (context, state) {
-            // final movieId = state.pathParameters['id']!;
-            return const MaterialPage(
-              child: CatalogPage(),
+            final videoId = state.pathParameters['id']!;
+            return MaterialPage(
+              child: AddEditVideoPage(
+                videoId: videoId,
+              ),
             );
           },
         ),

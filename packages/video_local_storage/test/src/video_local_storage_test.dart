@@ -6,7 +6,7 @@ import 'package:video_local_storage/video_local_storage.dart';
 void main() {
   group('VideoLocalStorage', () {
     test('can be instantiated', () {
-      expect(VideoLocalStorage.init(), isNotNull);
+      expect(VideoLocalStorage.init(''), isNotNull);
     });
   });
 }

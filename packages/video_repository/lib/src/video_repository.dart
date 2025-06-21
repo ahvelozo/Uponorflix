@@ -36,8 +36,7 @@ abstract class VideoRepository {
 /// Implementation of [VideoRepository] using Hive-based local storage.
 class HiveVideoRepository implements VideoRepository {
   /// Creates a [HiveVideoRepository] with the given [VideoLocalStorage].
-  ///
-  /// Use [VideoLocalStorage.instance] when instantiating.
+
   HiveVideoRepository(this._storage);
 
   /// The underlying video local storage instance.

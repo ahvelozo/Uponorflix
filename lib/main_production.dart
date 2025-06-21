@@ -1,11 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:uponorflix/app/app.dart';
 import 'package:uponorflix/bootstrap.dart';
 import 'package:video_local_storage/video_local_storage.dart';
 import 'package:video_repository/video_repository.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final videoLocalStorage = VideoLocalStorage();
-  await VideoLocalStorage.init();
+  final dir = await path_provider.getApplicationDocumentsDirectory();
+  await VideoLocalStorage.init(dir.path);
   final hiveVideoRepository = HiveVideoRepository(videoLocalStorage);
 
   await bootstrap(

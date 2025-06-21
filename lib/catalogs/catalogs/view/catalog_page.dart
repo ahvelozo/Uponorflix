@@ -12,7 +12,7 @@ class CatalogPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final videoRepository = RepositoryProvider.of<VideoRepository>(context);
+    final videoRepository = RepositoryProvider.of<HiveVideoRepository>(context);
     return BlocProvider(
       create: (_) => CatalogCubit(videoRepository),
       child: const CatalogView(),

@@ -19,6 +19,10 @@ dependencies:
   go_router: ^15.2.3
   intl: ^0.20.2
   json_annotation: ^4.9.0
+  video_local_storage:
+    path: packages/video_local_storage
+  video_repository:
+    path: packages/video_repository
 
 dev_dependencies:
   bloc_test: ^10.0.0

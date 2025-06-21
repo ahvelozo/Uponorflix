@@ -28,7 +28,7 @@ class VideoList extends StatelessWidget {
           );
         }
         return Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: const EdgeInsets.only(bottom: 8),
           child: VideoCard(video: videos[index]),
         );
       },

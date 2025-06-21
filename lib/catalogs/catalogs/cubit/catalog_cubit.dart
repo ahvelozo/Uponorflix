@@ -1,8 +1,7 @@
-// ignore_for_file: lines_longer_than_80_chars
-
 import 'package:bloc/bloc.dart';
 import 'package:uponorflix/catalogs/catalogs/cubit/cubit.dart';
-import 'package:uponorflix/catalogs/models/video_view_model.dart';
+import 'package:uponorflix/catalogs/models/video_mapper_extensions.dart';
+import 'package:video_repository/video_repository.dart';
 
 // -----------------------------------------------------------------------------
 // Repository contract – delivers paginated view‑models
@@ -27,7 +26,11 @@ class CatalogCubit extends Cubit<CatalogState> {
         emit(state.copyWith(status: CatalogStatus.loading));
       }
 
-      final videos = await _repository.fetchPage(page: _page, limit: _limit);
+      final videosEntity = await _repository.fetchPage(
+        page: _page,
+        limit: _limit,
+      );
+      final videos = videosEntity.toViewModels();
       _page++;
 
       emit(
@@ -42,7 +45,7 @@ class CatalogCubit extends Cubit<CatalogState> {
                 hasReachedMax: videos.length < _limit,
               ),
       );
-    } catch (e) {
+    } on Exception catch (e) {
       emit(
         state.copyWith(
           status: CatalogStatus.failure,

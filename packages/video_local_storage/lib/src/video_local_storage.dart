@@ -1,13 +1,10 @@
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
-import 'package:video_local_storage/src/model/video_entity.dart';
+import 'package:video_local_storage/src/models/video_entity.dart';
 
 /*───────────────────────────────────────────────────────────────────────────*/
 /// Hive DAO: opens the box lazily and exposes CRUD + paged fetch.
 class VideoLocalStorage {
-  VideoLocalStorage._();
-  static final VideoLocalStorage instance = VideoLocalStorage._();
-
   static const _boxName = 'videosBox';
   static bool _isHiveReady = false;
   Box<VideoEntity>? _box;

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uponorflix/catalogs/catalogs/cubit/cubit.dart';
 import 'package:uponorflix/catalogs/catalogs/widgets/responsive_catalog.dart';
+import 'package:uponorflix/widgets/app_drawer.dart';
 
 class CatalogView extends StatefulWidget {
   const CatalogView({super.key});
@@ -40,6 +41,7 @@ class CatalogViewState extends State<CatalogView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(title: const Text('Catalog')),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.go('/catalog/new'),

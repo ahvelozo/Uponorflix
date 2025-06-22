@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uponorflix/catalogs/add_edit_video/cubit/cubit.dart';
 import 'package:uponorflix/catalogs/models/video_view_model.dart';
+import 'package:uponorflix/widgets/app_drawer.dart';
 
 class VideoFormView extends StatefulWidget {
   const VideoFormView({super.key});
@@ -87,6 +88,7 @@ class _VideoFormViewState extends State<VideoFormView> {
           return const Center(child: CircularProgressIndicator.adaptive());
         } else {
           return Scaffold(
+            drawer: const AppDrawer(),
             appBar: AppBar(
               title: BlocBuilder<VideoFormCubit, VideoFormState>(
                 buildWhen: (p, c) => p.video?.id != c.video?.id,

@@ -237,8 +237,82 @@ class _RectCard extends StatefulWidget {
 
 class _RectCardState extends State<_RectCard> {
   bool _hovering = false;
-
   void _setHover(bool h) => setState(() => _hovering = h);
+
+  void _showFloatingDialog() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black54,
+      builder: (ctx) => Center(
+        child: Material(
+          color: Colors.black87,
+          borderRadius: BorderRadius.circular(12),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 320),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          widget.video.thumbnailUrl,
+                          height: 200,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, _, _) =>
+                              Container(height: 200, color: Colors.grey),
+                        ),
+                      ),
+                      Positioned(
+                        top: 4,
+                        right: 4,
+                        child: IconButton(
+                          icon: const Icon(Icons.close, color: Colors.white70),
+                          onPressed: () => Navigator.pop(ctx),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    widget.video.title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'Year: ${widget.video.year}',
+                    style: const TextStyle(color: Colors.white70, fontSize: 14),
+                  ),
+                  Text(
+                    'Type: ${widget.video.type.name}',
+                    style: const TextStyle(color: Colors.white54, fontSize: 13),
+                  ),
+                  // const SizedBox(height: 16),
+                  // // ElevatedButton.icon(
+                  // //   onPressed: () {
+                  // //     Navigator.pop(ctx);
+                  // //     context.go('/catalog/${widget.video.id}/edit');
+                  // //   },
+                  // //   icon: const Icon(Icons.edit),
+                  // //   label: const Text('Edit'),
+                  // // ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -246,13 +320,8 @@ class _RectCardState extends State<_RectCard> {
       onEnter: (_) => _setHover(true),
       onExit: (_) => _setHover(false),
       child: GestureDetector(
-        onTap: () => _setHover(true),
-        onLongPress: () => context.go(
-          '/catalog/${widget.video.id}/edit',
-        ),
-        onTapDown: (_) => _setHover(true),
-        onTapCancel: () => _setHover(false),
-        onTapUp: (_) => _setHover(false),
+        onTap: _showFloatingDialog,
+        onLongPress: _showFloatingDialog,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           width: 140,
@@ -261,62 +330,16 @@ class _RectCardState extends State<_RectCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: Image.network(
-                      widget.video.thumbnailUrl,
-                      height: 180,
-                      width: 140,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, _, _) =>
-                          Container(height: 180, color: Colors.grey),
-                    ),
-                  ),
-                  if (_hovering)
-                    Positioned.fill(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          color: Colors.black.withValues(alpha: 0.75),
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              widget.video.title,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              'Year: ${widget.video.year}',
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 12,
-                              ),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              'Type: ${widget.video.type.name}',
-                              style: const TextStyle(
-                                color: Colors.white54,
-                                fontSize: 11,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                ],
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Image.network(
+                  widget.video.thumbnailUrl,
+                  height: 180,
+                  width: 140,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, _, _) =>
+                      Container(height: 180, color: Colors.grey),
+                ),
               ),
               const SizedBox(height: 4),
               Text(

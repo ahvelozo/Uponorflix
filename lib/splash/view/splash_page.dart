@@ -102,7 +102,7 @@ class _GlowingLogo extends StatelessWidget {
         color: Colors.redAccent,
         shadows: [
           BoxShadow(
-            color: Colors.redAccent.withOpacity(0.65),
+            color: Colors.redAccent.withValues(alpha: 0.65),
             blurRadius: 18,
             spreadRadius: 2,
           ),

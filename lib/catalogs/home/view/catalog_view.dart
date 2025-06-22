@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element_parameter, document_ignores
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uponorflix/catalogs/home/cubit/cubit.dart';
@@ -12,13 +14,13 @@ class CatalogView extends StatelessWidget {
       backgroundColor: Colors.black,
       body: CustomScrollView(
         slivers: [
-          const SliverAppBar(
+          SliverAppBar(
             floating: true,
             snap: true,
             backgroundColor: Colors.transparent,
             title: Text(
-              'Uponorflix',
-              style: TextStyle(color: Colors.red),
+              'Uponorflix'.toUpperCase(),
+              style: const TextStyle(color: Colors.red),
             ),
           ),
 
@@ -73,7 +75,7 @@ class _RecentGallerySection extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   itemCount: recents.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 6),
+                  separatorBuilder: (_, _) => const SizedBox(width: 6),
                   itemBuilder: (_, i) => _GalleryItem(video: recents[i]),
                 ),
               ),
@@ -100,7 +102,7 @@ class _GalleryItem extends StatelessWidget {
           width: 140,
           height: 220,
           fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => Container(color: Colors.grey),
+          errorBuilder: (_, _, _) => Container(color: Colors.grey),
         ),
       ),
     );
@@ -212,7 +214,7 @@ class _VideoThumb extends StatelessWidget {
             width: 110,
             height: 160,
             fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => Container(color: Colors.grey),
+            errorBuilder: (_, _, _) => Container(color: Colors.grey),
           ),
         ),
       ),

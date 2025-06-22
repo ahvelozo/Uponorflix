@@ -1,3 +1,5 @@
+// ignore_for_file: use_if_null_to_convert_nulls_to_bools, document_ignores
+
 import 'package:bloc/bloc.dart';
 import 'package:uponorflix/catalogs/home/cubit/cubit.dart';
 import 'package:uponorflix/catalogs/models/video_mapper_extensions.dart';
@@ -79,7 +81,7 @@ class CatalogCubit extends Cubit<CatalogState> {
   /*── Refresh all ─*/
   Future<void> refreshAll() async {
     emit(const CatalogState());
-    _pages.updateAll((_, __) => 0);
+    _pages.updateAll((_, _) => 0);
     for (final t in CatalogType.values) {
       await fetchNextPage(t);
     }

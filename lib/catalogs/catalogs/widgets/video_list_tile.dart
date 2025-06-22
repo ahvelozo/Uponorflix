@@ -32,7 +32,7 @@ class VideoListTile extends StatelessWidget {
               width: 64,
               height: 96,
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
+              errorBuilder: (_, _, _) => const Icon(Icons.broken_image),
             ),
           ),
           Positioned(

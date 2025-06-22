@@ -31,8 +31,10 @@ void main() {
     });
 
     test('initial state is CatalogState', () {
-      // The cubit calls fetchNextPage() in the constructor, so the state will not remain initial.
-      // Instead, check that the initial state is loading or success with hasReachedMax true and empty videos.
+      // The cubit calls fetchNextPage() in the constructor,
+      // so the state will not remain initial.
+      // Instead, check that the initial state is loading or success with
+      // hasReachedMax true and empty videos.
       expect(
         cubit.state,
         const CatalogState(

@@ -10,7 +10,11 @@ abstract class VideoRepository {
   ///
   /// [page] is the page number (zero-based).
   /// [limit] is the maximum number of items to return.
-  Future<List<VideoEntity>> fetchPage({required int page, required int limit});
+  Future<List<VideoEntity>> fetchPage({
+    required int page,
+    required int limit,
+    CatalogTypeHive? filterType,
+  });
 
   /// Inserts or updates a [VideoEntity] in the repository.
   ///
@@ -21,6 +25,11 @@ abstract class VideoRepository {
   ///
   /// [id] is the identifier of the video to delete.
   Future<void> delete(String id);
+
+  /// Deletes all videos from the repository.
+  ///
+  /// This method removes all video entities from the local storage.
+  Future<void> deleteAll();
 
   /// Retrieves a [VideoEntity] by its [id].
   ///
@@ -47,7 +56,8 @@ class HiveVideoRepository implements VideoRepository {
   Future<List<VideoEntity>> fetchPage({
     required int page,
     required int limit,
-  }) => _storage.fetchPage(page: page, limit: limit);
+    CatalogTypeHive? filterType,
+  }) => _storage.fetchPage(page: page, limit: limit, filterType: filterType);
 
   /// {@macro VideoRepository.upsert}
   @override
@@ -56,6 +66,10 @@ class HiveVideoRepository implements VideoRepository {
   /// {@macro VideoRepository.delete}
   @override
   Future<void> delete(String id) => _storage.delete(id);
+
+  /// {@macro VideoRepository.deleteAll}
+  @override
+  Future<void> deleteAll() => _storage.deleteAll();
 
   /// {@macro VideoRepository.getById}
   @override

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:uponorflix/catalogs/catalogs/cubit/cubit.dart';
+import 'package:uponorflix/catalogs/catalogs_v2/cubit/cubit.dart';
 import 'package:uponorflix/catalogs/models/video_mapper_extensions.dart';
 import 'package:video_repository/video_repository.dart';
 

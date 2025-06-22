@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uponorflix/catalogs/catalogs/cubit/cubit.dart';
-import 'package:uponorflix/catalogs/catalogs/widgets/responsive_catalog.dart';
+import 'package:uponorflix/catalogs/catalogs_v2/cubit/cubit.dart';
+import 'package:uponorflix/catalogs/catalogs_v2/widgets/responsive_catalog.dart';
 
 class CatalogView extends StatefulWidget {
   const CatalogView({super.key});

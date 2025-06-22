@@ -37,13 +37,15 @@ class VideoEntity extends HiveObject {
   /// [year] year of release.
   /// [thumbnailUrl] thumbnail URL.
   /// [type] catalog type of the video.
+  /// [createdAt] creation date of the video entity.
   VideoEntity({
     required this.id,
     required this.title,
     required this.year,
     required this.thumbnailUrl,
     required this.type,
-  });
+    DateTime? createdAt,
+  }) : createdAt = createdAt ?? DateTime.now();
 
   /// Unique identifier of the video.
   @HiveField(0)
@@ -64,4 +66,8 @@ class VideoEntity extends HiveObject {
   /// Catalog type of the video.
   @HiveField(4)
   CatalogTypeHive type;
+
+  /// Creation date of the video entity.
+  @HiveField(5)
+  DateTime createdAt;
 }

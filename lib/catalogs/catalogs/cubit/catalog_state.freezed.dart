@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CatalogState {
 
- CatalogStatus get status; List<VideoViewModel> get videos; bool get hasReachedMax; String? get errorMessage;
+ CatalogStatus get status; Map<CatalogType, List<VideoViewModel>> get items; List<VideoViewModel> get recent; Map<CatalogType, bool> get reachedMax; String? get errorMessage;
 /// Create a copy of CatalogState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $CatalogStateCopyWith<CatalogState> get copyWith => _$CatalogStateCopyWithImpl<C
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CatalogState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.videos, videos)&&(identical(other.hasReachedMax, hasReachedMax) || other.hasReachedMax == hasReachedMax)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CatalogState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.items, items)&&const DeepCollectionEquality().equals(other.recent, recent)&&const DeepCollectionEquality().equals(other.reachedMax, reachedMax)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(videos),hasReachedMax,errorMessage);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(items),const DeepCollectionEquality().hash(recent),const DeepCollectionEquality().hash(reachedMax),errorMessage);
 
 @override
 String toString() {
-  return 'CatalogState(status: $status, videos: $videos, hasReachedMax: $hasReachedMax, errorMessage: $errorMessage)';
+  return 'CatalogState(status: $status, items: $items, recent: $recent, reachedMax: $reachedMax, errorMessage: $errorMessage)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $CatalogStateCopyWith<$Res>  {
   factory $CatalogStateCopyWith(CatalogState value, $Res Function(CatalogState) _then) = _$CatalogStateCopyWithImpl;
 @useResult
 $Res call({
- CatalogStatus status, List<VideoViewModel> videos, bool hasReachedMax, String? errorMessage
+ CatalogStatus status, Map<CatalogType, List<VideoViewModel>> items, List<VideoViewModel> recent, Map<CatalogType, bool> reachedMax, String? errorMessage
 });
 
 
@@ -63,12 +63,13 @@ class _$CatalogStateCopyWithImpl<$Res>
 
 /// Create a copy of CatalogState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? videos = null,Object? hasReachedMax = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? items = null,Object? recent = null,Object? reachedMax = null,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as CatalogStatus,videos: null == videos ? _self.videos : videos // ignore: cast_nullable_to_non_nullable
-as List<VideoViewModel>,hasReachedMax: null == hasReachedMax ? _self.hasReachedMax : hasReachedMax // ignore: cast_nullable_to_non_nullable
-as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as CatalogStatus,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
+as Map<CatalogType, List<VideoViewModel>>,recent: null == recent ? _self.recent : recent // ignore: cast_nullable_to_non_nullable
+as List<VideoViewModel>,reachedMax: null == reachedMax ? _self.reachedMax : reachedMax // ignore: cast_nullable_to_non_nullable
+as Map<CatalogType, bool>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -80,18 +81,31 @@ as String?,
 
 
 class _CatalogState implements CatalogState {
-  const _CatalogState({this.status = CatalogStatus.initial, final  List<VideoViewModel> videos = const <VideoViewModel>[], this.hasReachedMax = false, this.errorMessage}): _videos = videos;
+  const _CatalogState({this.status = CatalogStatus.initial, final  Map<CatalogType, List<VideoViewModel>> items = const <CatalogType, List<VideoViewModel>>{}, final  List<VideoViewModel> recent = const <VideoViewModel>[], final  Map<CatalogType, bool> reachedMax = const {}, this.errorMessage}): _items = items,_recent = recent,_reachedMax = reachedMax;
   
 
 @override@JsonKey() final  CatalogStatus status;
- final  List<VideoViewModel> _videos;
-@override@JsonKey() List<VideoViewModel> get videos {
-  if (_videos is EqualUnmodifiableListView) return _videos;
+ final  Map<CatalogType, List<VideoViewModel>> _items;
+@override@JsonKey() Map<CatalogType, List<VideoViewModel>> get items {
+  if (_items is EqualUnmodifiableMapView) return _items;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_videos);
+  return EqualUnmodifiableMapView(_items);
 }
 
-@override@JsonKey() final  bool hasReachedMax;
+ final  List<VideoViewModel> _recent;
+@override@JsonKey() List<VideoViewModel> get recent {
+  if (_recent is EqualUnmodifiableListView) return _recent;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_recent);
+}
+
+ final  Map<CatalogType, bool> _reachedMax;
+@override@JsonKey() Map<CatalogType, bool> get reachedMax {
+  if (_reachedMax is EqualUnmodifiableMapView) return _reachedMax;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_reachedMax);
+}
+
 @override final  String? errorMessage;
 
 /// Create a copy of CatalogState
@@ -104,16 +118,16 @@ _$CatalogStateCopyWith<_CatalogState> get copyWith => __$CatalogStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CatalogState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._videos, _videos)&&(identical(other.hasReachedMax, hasReachedMax) || other.hasReachedMax == hasReachedMax)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CatalogState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._items, _items)&&const DeepCollectionEquality().equals(other._recent, _recent)&&const DeepCollectionEquality().equals(other._reachedMax, _reachedMax)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_videos),hasReachedMax,errorMessage);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_items),const DeepCollectionEquality().hash(_recent),const DeepCollectionEquality().hash(_reachedMax),errorMessage);
 
 @override
 String toString() {
-  return 'CatalogState(status: $status, videos: $videos, hasReachedMax: $hasReachedMax, errorMessage: $errorMessage)';
+  return 'CatalogState(status: $status, items: $items, recent: $recent, reachedMax: $reachedMax, errorMessage: $errorMessage)';
 }
 
 
@@ -124,7 +138,7 @@ abstract mixin class _$CatalogStateCopyWith<$Res> implements $CatalogStateCopyWi
   factory _$CatalogStateCopyWith(_CatalogState value, $Res Function(_CatalogState) _then) = __$CatalogStateCopyWithImpl;
 @override @useResult
 $Res call({
- CatalogStatus status, List<VideoViewModel> videos, bool hasReachedMax, String? errorMessage
+ CatalogStatus status, Map<CatalogType, List<VideoViewModel>> items, List<VideoViewModel> recent, Map<CatalogType, bool> reachedMax, String? errorMessage
 });
 
 
@@ -141,12 +155,13 @@ class __$CatalogStateCopyWithImpl<$Res>
 
 /// Create a copy of CatalogState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? videos = null,Object? hasReachedMax = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? items = null,Object? recent = null,Object? reachedMax = null,Object? errorMessage = freezed,}) {
   return _then(_CatalogState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as CatalogStatus,videos: null == videos ? _self._videos : videos // ignore: cast_nullable_to_non_nullable
-as List<VideoViewModel>,hasReachedMax: null == hasReachedMax ? _self.hasReachedMax : hasReachedMax // ignore: cast_nullable_to_non_nullable
-as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as CatalogStatus,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
+as Map<CatalogType, List<VideoViewModel>>,recent: null == recent ? _self._recent : recent // ignore: cast_nullable_to_non_nullable
+as List<VideoViewModel>,reachedMax: null == reachedMax ? _self._reachedMax : reachedMax // ignore: cast_nullable_to_non_nullable
+as Map<CatalogType, bool>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

@@ -57,6 +57,12 @@ class VideoLocalStorage {
     await box.delete(id);
   }
 
+  /// Removes **all** videos from the local box.
+  Future<void> deleteAll() async {
+    final box = await _openBox();
+    await box.clear();
+  }
+
   /// Retrieves a [VideoEntity] by its [id].
   ///
   /// Returns the [VideoEntity] if found, otherwise `null`.
@@ -69,16 +75,20 @@ class VideoLocalStorage {
   ///
   /// [page] is the page number (zero-based).
   /// [limit] is the maximum number of items to return.
+  /// [filterType] is an optional filter for catalog type (null = all types).
   /// Returns a list of [VideoEntity] objects for the requested page.
   Future<List<VideoEntity>> fetchPage({
     required int page,
     required int limit,
+    CatalogTypeHive? filterType, // null = all types
   }) async {
     final box = await _openBox();
+    final filtered =
+        box.values
+            .where((e) => filterType == null || e.type == filterType)
+            .toList()
+          ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
     final start = page * limit;
-    return box.values.skip(start).take(limit).toList()..sort((a, b) {
-      final byYear = b.year.compareTo(a.year);
-      return byYear != 0 ? byYear : a.title.compareTo(b.title);
-    });
+    return filtered.skip(start).take(limit).toList();
   }
 }

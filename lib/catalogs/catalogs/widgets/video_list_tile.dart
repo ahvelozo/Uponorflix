@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uponorflix/catalogs/models/video_view_model.dart';
 
@@ -21,45 +22,57 @@ class VideoListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () => context.go('/catalog/${video.id}/edit'),
-      leading: Stack(
+    return Slidable(
+      key: ValueKey(video.id),
+      endActionPane: ActionPane(
+        motion: const DrawerMotion(),
+        extentRatio: 0.4,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(4),
-            child: Image.network(
-              video.thumbnailUrl,
-              width: 64,
-              height: 96,
-              fit: BoxFit.cover,
-              errorBuilder: (_, _, _) => const Icon(Icons.broken_image),
-            ),
-          ),
-          Positioned(
-            top: 4,
-            left: 4,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-              decoration: BoxDecoration(
-                color: _badgeColor(context).withValues(alpha: 0.85),
-                borderRadius: BorderRadius.circular(3),
-              ),
-              child: Text(
-                video.type.name.toUpperCase(),
-                style: const TextStyle(fontSize: 9, color: Colors.white),
-              ),
-            ),
+          SlidableAction(
+            onPressed: (_) => context.go('/catalog/${video.id}/edit'),
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+            icon: Icons.edit,
+            label: 'Edit Video',
           ),
         ],
       ),
-      title: Text(
-        video.title,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+      child: ListTile(
+        onTap: () => context.go('/catalog/${video.id}/edit'),
+        leading: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Image.network(
+                video.thumbnailUrl,
+                width: 64,
+                height: 96,
+                fit: BoxFit.cover,
+                errorBuilder: (_, _, _) => const Icon(Icons.broken_image),
+              ),
+            ),
+            Positioned(
+              top: 4,
+              left: 4,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                decoration: BoxDecoration(
+                  color: _badgeColor(context).withValues(alpha: 0.85),
+                  borderRadius: BorderRadius.circular(3),
+                ),
+                child: Text(
+                  video.type.name.toUpperCase(),
+                  style: const TextStyle(fontSize: 9, color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
+        title: Text(video.title, maxLines: 1, overflow: TextOverflow.ellipsis),
+        subtitle: Text('${video.year}'),
+        trailing: const Icon(Icons.chevron_right),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       ),
-      subtitle: Text('${video.year}'),
-      trailing: const Icon(Icons.chevron_right),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
     );
   }
 }

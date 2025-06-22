@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$VideoFormState {
 
- VideoFormStatus get status; VideoViewModel? get video; String? get error;
+ bool get loadData; VideoFormStatus get status; VideoViewModel? get video; String? get thumbnailUrl; String? get error;
 /// Create a copy of VideoFormState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $VideoFormStateCopyWith<VideoFormState> get copyWith => _$VideoFormStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is VideoFormState&&(identical(other.status, status) || other.status == status)&&(identical(other.video, video) || other.video == video)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VideoFormState&&(identical(other.loadData, loadData) || other.loadData == loadData)&&(identical(other.status, status) || other.status == status)&&(identical(other.video, video) || other.video == video)&&(identical(other.thumbnailUrl, thumbnailUrl) || other.thumbnailUrl == thumbnailUrl)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,video,error);
+int get hashCode => Object.hash(runtimeType,loadData,status,video,thumbnailUrl,error);
 
 @override
 String toString() {
-  return 'VideoFormState(status: $status, video: $video, error: $error)';
+  return 'VideoFormState(loadData: $loadData, status: $status, video: $video, thumbnailUrl: $thumbnailUrl, error: $error)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $VideoFormStateCopyWith<$Res>  {
   factory $VideoFormStateCopyWith(VideoFormState value, $Res Function(VideoFormState) _then) = _$VideoFormStateCopyWithImpl;
 @useResult
 $Res call({
- VideoFormStatus status, VideoViewModel? video, String? error
+ bool loadData, VideoFormStatus status, VideoViewModel? video, String? thumbnailUrl, String? error
 });
 
 
@@ -63,11 +63,13 @@ class _$VideoFormStateCopyWithImpl<$Res>
 
 /// Create a copy of VideoFormState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? video = freezed,Object? error = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? loadData = null,Object? status = null,Object? video = freezed,Object? thumbnailUrl = freezed,Object? error = freezed,}) {
   return _then(_self.copyWith(
-status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+loadData: null == loadData ? _self.loadData : loadData // ignore: cast_nullable_to_non_nullable
+as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as VideoFormStatus,video: freezed == video ? _self.video : video // ignore: cast_nullable_to_non_nullable
-as VideoViewModel?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as VideoViewModel?,thumbnailUrl: freezed == thumbnailUrl ? _self.thumbnailUrl : thumbnailUrl // ignore: cast_nullable_to_non_nullable
+as String?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -79,11 +81,13 @@ as String?,
 
 
 class _VideoFormState extends VideoFormState {
-  const _VideoFormState({this.status = VideoFormStatus.initial, this.video, this.error}): super._();
+  const _VideoFormState({this.loadData = false, this.status = VideoFormStatus.initial, this.video, this.thumbnailUrl, this.error}): super._();
   
 
+@override@JsonKey() final  bool loadData;
 @override@JsonKey() final  VideoFormStatus status;
 @override final  VideoViewModel? video;
+@override final  String? thumbnailUrl;
 @override final  String? error;
 
 /// Create a copy of VideoFormState
@@ -96,16 +100,16 @@ _$VideoFormStateCopyWith<_VideoFormState> get copyWith => __$VideoFormStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VideoFormState&&(identical(other.status, status) || other.status == status)&&(identical(other.video, video) || other.video == video)&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VideoFormState&&(identical(other.loadData, loadData) || other.loadData == loadData)&&(identical(other.status, status) || other.status == status)&&(identical(other.video, video) || other.video == video)&&(identical(other.thumbnailUrl, thumbnailUrl) || other.thumbnailUrl == thumbnailUrl)&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,video,error);
+int get hashCode => Object.hash(runtimeType,loadData,status,video,thumbnailUrl,error);
 
 @override
 String toString() {
-  return 'VideoFormState(status: $status, video: $video, error: $error)';
+  return 'VideoFormState(loadData: $loadData, status: $status, video: $video, thumbnailUrl: $thumbnailUrl, error: $error)';
 }
 
 
@@ -116,7 +120,7 @@ abstract mixin class _$VideoFormStateCopyWith<$Res> implements $VideoFormStateCo
   factory _$VideoFormStateCopyWith(_VideoFormState value, $Res Function(_VideoFormState) _then) = __$VideoFormStateCopyWithImpl;
 @override @useResult
 $Res call({
- VideoFormStatus status, VideoViewModel? video, String? error
+ bool loadData, VideoFormStatus status, VideoViewModel? video, String? thumbnailUrl, String? error
 });
 
 
@@ -133,11 +137,13 @@ class __$VideoFormStateCopyWithImpl<$Res>
 
 /// Create a copy of VideoFormState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? video = freezed,Object? error = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? loadData = null,Object? status = null,Object? video = freezed,Object? thumbnailUrl = freezed,Object? error = freezed,}) {
   return _then(_VideoFormState(
-status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+loadData: null == loadData ? _self.loadData : loadData // ignore: cast_nullable_to_non_nullable
+as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as VideoFormStatus,video: freezed == video ? _self.video : video // ignore: cast_nullable_to_non_nullable
-as VideoViewModel?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as VideoViewModel?,thumbnailUrl: freezed == thumbnailUrl ? _self.thumbnailUrl : thumbnailUrl // ignore: cast_nullable_to_non_nullable
+as String?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

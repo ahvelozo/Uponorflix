@@ -6,8 +6,10 @@ part 'add_edit_video_state.freezed.dart';
 @freezed
 class VideoFormState with _$VideoFormState {
   const factory VideoFormState({
+    @Default(false) bool loadData,
     @Default(VideoFormStatus.initial) VideoFormStatus status,
     VideoViewModel? video,
+    String? thumbnailUrl,
     String? error,
   }) = _VideoFormState;
   const VideoFormState._();

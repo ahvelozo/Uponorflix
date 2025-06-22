@@ -17,14 +17,19 @@ class VideoFormCubit extends Cubit<VideoFormState> {
   CatalogTypeHive _toHive(CatalogType t) => CatalogTypeHive.values[t.index];
 
   Future<void> _load(String? id) async {
-    if (id == null) return;
-    emit(state.copyWith(status: VideoFormStatus.loading));
+    if (id == null) {
+      emit(
+        state.copyWith(loadData: true),
+      );
+      return;
+    }
+
     try {
       final entity = await repo.getById(id);
       if (entity != null) {
         emit(
           state.copyWith(
-            status: VideoFormStatus.success,
+            loadData: true,
             video: VideoViewModel(
               id: entity.id,
               title: entity.title,
@@ -60,7 +65,6 @@ class VideoFormCubit extends Cubit<VideoFormState> {
       emit(
         state.copyWith(
           status: VideoFormStatus.success,
-          // video: view.copyWith(id: entity.id),
         ),
       );
     } on Exception catch (e) {
@@ -68,5 +72,23 @@ class VideoFormCubit extends Cubit<VideoFormState> {
         state.copyWith(status: VideoFormStatus.failure, error: e.toString()),
       );
     }
+  }
+
+  Future<void> delete() async {
+    final id = state.video?.id;
+    if (id == null || id.isEmpty) return;
+    emit(state.copyWith(status: VideoFormStatus.loading));
+    try {
+      await repo.delete(id);
+      emit(state.copyWith(status: VideoFormStatus.success, video: null));
+    } on Exception catch (e) {
+      emit(
+        state.copyWith(status: VideoFormStatus.failure, error: e.toString()),
+      );
+    }
+  }
+
+  void updateThumbnail(String thumbnailUrl) {
+    emit(state.copyWith(thumbnailUrl: thumbnailUrl));
   }
 }

@@ -34,14 +34,14 @@ final GoRouter appRouter = GoRouter(
       routes: [
         GoRoute(
           path: 'new',
-          name: RouteNames.movieNew,
+          name: RouteNames.videoNew,
           pageBuilder: (context, state) =>
               const MaterialPage(child: AddEditVideoPage()),
         ),
         GoRoute(
           path: ':id/edit',
-          name: RouteNames.movieEdit,
-          // Pass the movie id down to the page;
+          name: RouteNames.videoEdit,
+          // Pass the video id down to the page;
           // the page decides if it's add or edit
           pageBuilder: (context, state) {
             final videoId = state.pathParameters['id']!;
@@ -67,6 +67,6 @@ final GoRouter appRouter = GoRouter(
 abstract class RouteNames {
   static const splash = 'splash';
   static const catalog = 'catalog';
-  static const movieNew = 'movie_new';
-  static const movieEdit = 'movie_edit';
+  static const videoNew = 'video_new';
+  static const videoEdit = 'video_edit';
 }

@@ -135,32 +135,30 @@ class _VideoFormViewState extends State<VideoFormView> {
                       ),
                       Breakpoints.mediumAndUp: SlotLayout.from(
                         key: const Key('top mediumAndUp'),
-                        builder: (_) => Expanded(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: ListView(
-                                  children: [
-                                    TitleInputField(titleCtrl: _titleCtrl),
-                                    const SizedBox(height: 12),
-                                    YearInputField(yearCtrl: _yearCtrl),
-                                    const SizedBox(height: 12),
-                                    ThumbnailInputField(thumbCtrl: _thumbCtrl),
-                                    const SizedBox(height: 12),
-                                    newMethod(),
-                                    const SizedBox(height: 24),
-                                    saveEditButton(),
-                                  ],
-                                ),
+                        builder: (_) => Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: ListView(
+                                children: [
+                                  TitleInputField(titleCtrl: _titleCtrl),
+                                  const SizedBox(height: 12),
+                                  YearInputField(yearCtrl: _yearCtrl),
+                                  const SizedBox(height: 12),
+                                  ThumbnailInputField(thumbCtrl: _thumbCtrl),
+                                  const SizedBox(height: 12),
+                                  newMethod(),
+                                  const SizedBox(height: 24),
+                                  saveEditButton(),
+                                ],
                               ),
-                              const SizedBox(width: 24),
-                              Expanded(
-                                child: _Preview(thumbCtrl: _thumbCtrl),
-                              ),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(width: 24),
+                            Expanded(
+                              child: _Preview(thumbCtrl: _thumbCtrl),
+                            ),
+                          ],
                         ),
                       ),
                     },

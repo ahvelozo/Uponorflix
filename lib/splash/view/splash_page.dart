@@ -52,7 +52,7 @@ class _SplashPageState extends State<SplashPage>
 
   void _navigateNext() {
     if (mounted) {
-      context.go('/catalog'); // Change route as needed
+      context.go('/home'); // Change route as needed
     }
   }
 
@@ -94,7 +94,7 @@ class _GlowingLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      AppLocalizations.of(context).appTitle,
+      AppLocalizations.of(context).appTitle.toUpperCase(),
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 48,

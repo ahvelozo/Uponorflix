@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uponorflix/catalogs/catalogs/cubit/cubit.dart';
+import 'package:uponorflix/catalogs/catalogs/widgets/action_button_create.dart';
 import 'package:uponorflix/catalogs/catalogs/widgets/responsive_catalog.dart';
 import 'package:uponorflix/widgets/app_drawer.dart';
+import 'package:video_repository/video_repository.dart';
 
 class CatalogView extends StatefulWidget {
   const CatalogView({super.key});
@@ -40,13 +42,11 @@ class CatalogViewState extends State<CatalogView> {
 
   @override
   Widget build(BuildContext context) {
+    final repo = RepositoryProvider.of<HiveVideoRepository>(context);
     return Scaffold(
       drawer: const AppDrawer(),
-      appBar: AppBar(title: const Text('Catalog')),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.go('/catalog/new'),
-        child: const Icon(Icons.add),
-      ),
+      appBar: _appBarCustom(repo, context),
+      floatingActionButton: const ActionButtonCreate(),
       body: BlocBuilder<CatalogCubit, CatalogState>(
         builder: (context, state) {
           switch (state.status) {
@@ -74,6 +74,31 @@ class CatalogViewState extends State<CatalogView> {
           }
         },
       ),
+    );
+  }
+
+  AppBar _appBarCustom(VideoRepository repo, BuildContext context) {
+    return AppBar(
+      title: const Text('Catalog'),
+      centerTitle: true,
+      actions: [
+        IconButton(
+          tooltip: 'Seed demo data',
+          icon: const Icon(Icons.cloud_download_outlined),
+          onPressed: () async {
+            await repo.seedIfEmpty(count: 50);
+            if (context.mounted) await context.read<CatalogCubit>().refresh();
+          },
+        ),
+        IconButton(
+          tooltip: 'Delete all',
+          icon: const Icon(Icons.delete_forever),
+          onPressed: () async {
+            await repo.deleteAll();
+            if (context.mounted) await context.read<CatalogCubit>().refresh();
+          },
+        ),
+      ],
     );
   }
 }

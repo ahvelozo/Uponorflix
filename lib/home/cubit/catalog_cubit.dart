@@ -1,7 +1,7 @@
 // ignore_for_file: use_if_null_to_convert_nulls_to_bools, document_ignores
 
 import 'package:bloc/bloc.dart';
-import 'package:uponorflix/catalogs/home/cubit/cubit.dart';
+import 'package:uponorflix/home/cubit/cubit.dart';
 import 'package:uponorflix/catalogs/models/video_mapper_extensions.dart';
 import 'package:uponorflix/catalogs/models/video_view_model.dart';
 import 'package:video_local_storage/video_local_storage.dart';

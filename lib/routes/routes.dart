@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uponorflix/catalogs/add_edit_video/view/add_edit_video_page.dart';
 import 'package:uponorflix/catalogs/catalogs/view/catalog_page.dart';
-import 'package:uponorflix/catalogs/home/view/catalog_page.dart';
+import 'package:uponorflix/home/view/catalog_page.dart';
 import 'package:uponorflix/splash/splash.dart';
 
 /// Centralised GoRouter configuration for Uponorflix.

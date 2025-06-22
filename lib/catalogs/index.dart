@@ -1,1 +1,1 @@
-export 'home/view/catalog_page.dart';
+export '../home/view/catalog_page.dart';

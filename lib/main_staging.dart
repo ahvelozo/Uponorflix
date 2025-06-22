@@ -16,6 +16,7 @@ Future<void> main() async {
   }
   await VideoLocalStorage.init(path);
   final hiveVideoRepository = HiveVideoRepository(videoLocalStorage);
+  await hiveVideoRepository.seedIfEmpty();
   await bootstrap(
     () => App(
       videoLocalStorage: videoLocalStorage,

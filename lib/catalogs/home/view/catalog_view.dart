@@ -266,7 +266,7 @@ class _RectCardState extends State<_RectCard> {
                       height: 180,
                       width: 140,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) =>
+                      errorBuilder: (_, _, _) =>
                           Container(height: 180, color: Colors.grey),
                     ),
                   ),
@@ -275,7 +275,7 @@ class _RectCardState extends State<_RectCard> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
-                          color: Colors.black.withOpacity(0.75),
+                          color: Colors.black.withValues(alpha: 0.75),
                         ),
                         padding: const EdgeInsets.all(8),
                         child: Column(

@@ -3,5 +3,41 @@
     "counterAppBarTitle": "Counter",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
+    },
+    "appTitle": "Uponorflix",
+    "@appTitle": {
+        "description": "Main application title and logo text"
+    },
+    "catalogTitle": "Catalog",
+    "@catalogTitle": {
+        "description": "Title for the catalog page and AppBar"
+    },
+    "noVideos": "No videos",
+    "@noVideos": {
+        "description": "Shown when there are no videos in the catalog"
+    },
+    "errorPrefix": "Error: {error}",
+    "@errorPrefix": {
+        "description": "Prefix for error messages, {error} is replaced with the error message"
+    },
+    "addVideo": "Add Video",
+    "@addVideo": {
+        "description": "Label for the add video button and tooltip"
+    },
+    "home": "Home",
+    "@home": {
+        "description": "Label for the home drawer item"
+    },
+    "manageVideos": "Manage Videos",
+    "@manageVideos": {
+        "description": "Label for the manage videos drawer item"
+    },
+    "seedDemoData": "Seed demo data",
+    "@seedDemoData": {
+        "description": "Tooltip for seeding demo data"
+    },
+    "deleteAll": "Delete all",
+    "@deleteAll": {
+        "description": "Tooltip for deleting all videos"
     }
 }

@@ -9,10 +9,8 @@ enum CatalogStatus { initial, loading, success, failure }
 class CatalogState with _$CatalogState {
   const factory CatalogState({
     @Default(CatalogStatus.initial) CatalogStatus status,
-    @Default(<CatalogType, List<VideoViewModel>>{})
-    Map<CatalogType, List<VideoViewModel>> items,
-    @Default(<VideoViewModel>[]) List<VideoViewModel> recent,
-    @Default({}) Map<CatalogType, bool> reachedMax,
+    @Default(<VideoViewModel>[]) List<VideoViewModel> videos,
+    @Default(false) bool hasReachedMax,
     String? errorMessage,
   }) = _CatalogState;
 

@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:uponorflix/catalogs/catalogs/cubit/cubit.dart';
 import 'package:uponorflix/catalogs/models/video_mapper_extensions.dart';
-import 'package:uponorflix/catalogs/models/video_view_model.dart';
-import 'package:video_local_storage/video_local_storage.dart';
 import 'package:video_repository/video_repository.dart';
 
 // -----------------------------------------------------------------------------
@@ -10,59 +8,42 @@ import 'package:video_repository/video_repository.dart';
 // -----------------------------------------------------------------------------
 
 class CatalogCubit extends Cubit<CatalogState> {
-  CatalogCubit(
-    this._repository,
-  ) : super(const CatalogState()) {
-    _fetchRecent();
-    for (final t in CatalogType.values) {
-      fetchNextPage(t);
-    }
+  CatalogCubit(this._repository) : super(const CatalogState()) {
+    fetchNextPage();
   }
 
   static const _limit = 20;
   final VideoRepository _repository;
-  final Map<CatalogType, int> _pages = {for (var t in CatalogType.values) t: 0};
-  final Map<CatalogType, bool> _isFetching = {
-    for (var t in CatalogType.values) t: false,
-  };
+  int _page = 0;
+  bool _isFetching = false;
 
-  /*── Recent gallery ─*/
-  Future<void> _fetchRecent() async {
-    final recentEntities = await _repository.fetchPage(page: 0, limit: 5);
-    emit(state.copyWith(recent: recentEntities.toViewModels()));
-  }
-
-  /*── Infinite scroll per category ─*/
-  Future<void> fetchNextPage(CatalogType type) async {
-    if (state.reachedMax[type] == true || _isFetching[type] == true) return;
-    _isFetching[type] = true;
+  Future<void> fetchNextPage() async {
+    if (state.hasReachedMax || _isFetching) return;
+    _isFetching = true;
 
     try {
       if (state.status == CatalogStatus.initial) {
         emit(state.copyWith(status: CatalogStatus.loading));
       }
 
-      final page = _pages[type]!;
-      final entities = await _repository.fetchPage(
-        page: page,
+      final videosEntity = await _repository.fetchPage(
+        page: _page,
         limit: _limit,
-        filterType: type.toHive(),
       );
-      final videos = entities.toViewModels();
-      _pages[type] = page + 1;
+      final videos = videosEntity.toViewModels();
+      _page++;
 
       emit(
-        state.copyWith(
-          status: CatalogStatus.success,
-          items: {
-            ...state.items,
-            type: [...(state.items[type] ?? []), ...videos],
-          },
-          reachedMax: {
-            ...state.reachedMax,
-            type: videos.length < _limit,
-          },
-        ),
+        videos.isEmpty
+            ? state.copyWith(
+                status: CatalogStatus.success,
+                hasReachedMax: true,
+              )
+            : state.copyWith(
+                status: CatalogStatus.success,
+                videos: [...state.videos, ...videos],
+                hasReachedMax: videos.length < _limit,
+              ),
       );
     } on Exception catch (e) {
       emit(
@@ -72,21 +53,20 @@ class CatalogCubit extends Cubit<CatalogState> {
         ),
       );
     } finally {
-      _isFetching[type] = false;
+      _isFetching = false;
     }
   }
 
-  /*── Refresh all ─*/
-  Future<void> refreshAll() async {
+  Future<void> refresh() async {
+    _page = 0;
     emit(const CatalogState());
-    _pages.updateAll((_, __) => 0);
-    for (final t in CatalogType.values) {
-      await fetchNextPage(t);
-    }
+    await fetchNextPage();
   }
-}
 
-/*──────────────────────── EXTENSIONS ────────────────────────*/
-extension _HiveMap on CatalogType {
-  CatalogTypeHive toHive() => CatalogTypeHive.values[index];
+  Future<void> deleteVideo(String id) async {
+    await _repository.delete(id);
+    emit(
+      state.copyWith(videos: state.videos.where((v) => v.id != id).toList()),
+    );
+  }
 }

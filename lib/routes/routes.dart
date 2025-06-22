@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uponorflix/catalogs/add_edit_video/view/add_edit_video_page.dart';
 import 'package:uponorflix/catalogs/catalogs/view/catalog_page.dart';
-import 'package:uponorflix/catalogs/catalogs_v2/view/catalog_page.dart';
+import 'package:uponorflix/catalogs/home/view/catalog_page.dart';
 import 'package:uponorflix/splash/splash.dart';
 
 /// Centralised GoRouter configuration for Uponorflix.
@@ -28,10 +28,10 @@ final GoRouter appRouter = GoRouter(
           const NoTransitionPage(child: SplashPage()),
     ),
     GoRoute(
-      path: '/catalog/V2',
-      name: RouteNames.catalog2,
+      path: '/home',
+      name: RouteNames.home,
       pageBuilder: (context, state) =>
-          const NoTransitionPage(child: CatalogPageV2()),
+          const NoTransitionPage(child: HomePage()),
     ),
     GoRoute(
       path: '/catalog',
@@ -73,8 +73,8 @@ final GoRouter appRouter = GoRouter(
 /// Centralised list of route names to avoid typos.
 abstract class RouteNames {
   static const splash = 'splash';
+  static const home = 'home';
   static const catalog = 'catalog';
-  static const catalog2 = 'catalog2';
   static const videoNew = 'video_new';
   static const videoEdit = 'video_edit';
 }

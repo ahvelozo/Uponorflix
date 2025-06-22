@@ -3,12 +3,12 @@
 // -----------------------------------------------------------------------------
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uponorflix/catalogs/catalogs/cubit/cubit.dart';
-import 'package:uponorflix/catalogs/catalogs/view/catalog_view.dart';
+import 'package:uponorflix/catalogs/home/cubit/cubit.dart';
+import 'package:uponorflix/catalogs/home/view/catalog_view.dart';
 import 'package:video_repository/video_repository.dart';
 
-class CatalogPageV2 extends StatelessWidget {
-  const CatalogPageV2({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {

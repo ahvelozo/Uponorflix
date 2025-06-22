@@ -29,7 +29,7 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp.router(
         routerConfig: appRouter,
-        title: 'uponoflix',
+        title: 'Uponorflix',
         debugShowCheckedModeBanner: false,
         theme: FlutterTagTheme.light,
         darkTheme: FlutterTagTheme.dark,

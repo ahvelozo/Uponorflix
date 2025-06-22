@@ -11,16 +11,14 @@ class ActionButtonCreate extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return FloatingActionButton.extended(
-      label: const Row(
+      label: Row(
         children: [
-          Icon(Icons.add),
-          SizedBox(width: 16),
-          Text(
-            'Add Video',
-          ),
+          const Icon(Icons.add),
+          const SizedBox(width: 16),
+          Text(l10n.addVideo),
         ],
       ),
-      tooltip: 'Add Video',
+      tooltip: l10n.addVideo,
       onPressed: () {
         context.go('/catalog/new');
       },

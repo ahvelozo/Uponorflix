@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uponorflix/l10n/gen/app_localizations.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -14,7 +15,7 @@ class AppDrawer extends StatelessWidget {
             decoration: const BoxDecoration(color: Colors.black87),
             child: Center(
               child: Text(
-                'UPONORFLIX',
+                AppLocalizations.of(context).appTitle,
                 style: Theme.of(
                   context,
                 ).textTheme.titleLarge!.copyWith(color: Colors.red),
@@ -23,7 +24,7 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.home),
-            title: const Text('Home'),
+            title: Text(AppLocalizations.of(context).home),
             onTap: () {
               Navigator.pop(context); // cierra drawer
               context.go('/home');
@@ -31,7 +32,7 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.video_library),
-            title: const Text('Manage Videos'),
+            title: Text(AppLocalizations.of(context).manageVideos),
             onTap: () {
               Navigator.pop(context);
               context.go('/catalog');

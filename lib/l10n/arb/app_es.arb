@@ -3,5 +3,41 @@
     "counterAppBarTitle": "Contador",
     "@counterAppBarTitle": {
         "description": "Texto mostrado en la AppBar de la página del contador"
+    },
+    "appTitle": "Uponorflix",
+    "@appTitle": {
+        "description": "Título principal de la aplicación y texto del logo"
+    },
+    "catalogTitle": "Catálogo",
+    "@catalogTitle": {
+        "description": "Título para la página y AppBar del catálogo"
+    },
+    "noVideos": "Sin videos",
+    "@noVideos": {
+        "description": "Se muestra cuando no hay videos en el catálogo"
+    },
+    "errorPrefix": "Error: {error}",
+    "@errorPrefix": {
+        "description": "Prefijo para mensajes de error, {error} se reemplaza por el mensaje de error"
+    },
+    "addVideo": "Agregar video",
+    "@addVideo": {
+        "description": "Etiqueta para el botón y tooltip de agregar video"
+    },
+    "home": "Inicio",
+    "@home": {
+        "description": "Etiqueta para el ítem de drawer de inicio"
+    },
+    "manageVideos": "Gestionar videos",
+    "@manageVideos": {
+        "description": "Etiqueta para el ítem de drawer de gestión de videos"
+    },
+    "seedDemoData": "Cargar datos demo",
+    "@seedDemoData": {
+        "description": "Tooltip para cargar datos de demostración"
+    },
+    "deleteAll": "Eliminar todo",
+    "@deleteAll": {
+        "description": "Tooltip para eliminar todos los videos"
     }
 }

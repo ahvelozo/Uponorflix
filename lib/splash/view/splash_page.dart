@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uponorflix/l10n/gen/app_localizations.dart';
 
 /// Splash screen that mimics the popular Netflix intro but re‑branded
 /// for Uponorflix.
@@ -93,7 +94,7 @@ class _GlowingLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'UPONORFLIX',
+      AppLocalizations.of(context).appTitle,
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 48,

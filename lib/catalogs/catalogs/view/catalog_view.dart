@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:uponorflix/catalogs/catalogs/cubit/cubit.dart';
 import 'package:uponorflix/catalogs/catalogs/widgets/action_button_create.dart';
 import 'package:uponorflix/catalogs/catalogs/widgets/responsive_catalog.dart';
+import 'package:uponorflix/l10n/gen/app_localizations.dart';
 import 'package:uponorflix/widgets/app_drawer.dart';
 import 'package:video_repository/video_repository.dart';
 
@@ -52,7 +52,11 @@ class CatalogViewState extends State<CatalogView> {
           switch (state.status) {
             case CatalogStatus.failure:
               return Center(
-                child: Text('Error: ${state.errorMessage ?? 'unknown'}'),
+                child: Text(
+                  AppLocalizations.of(context).errorPrefix(
+                    state.errorMessage ?? 'unknown',
+                  ),
+                ),
               );
             case CatalogStatus.loading:
               return const Center(child: CircularProgressIndicator());
@@ -62,7 +66,9 @@ class CatalogViewState extends State<CatalogView> {
                 return const Center(child: CircularProgressIndicator());
               }
               if (state.videos.isEmpty) {
-                return const Center(child: Text('No videos'));
+                return Center(
+                  child: Text(AppLocalizations.of(context).noVideos),
+                );
               }
               return ResponsiveCatalog(
                 videos: state.videos,
@@ -79,11 +85,11 @@ class CatalogViewState extends State<CatalogView> {
 
   AppBar _appBarCustom(VideoRepository repo, BuildContext context) {
     return AppBar(
-      title: const Text('Catalog'),
+      title: Text(AppLocalizations.of(context).catalogTitle),
       centerTitle: true,
       actions: [
         IconButton(
-          tooltip: 'Seed demo data',
+          tooltip: AppLocalizations.of(context).seedDemoData,
           icon: const Icon(Icons.cloud_download_outlined),
           onPressed: () async {
             await repo.seedIfEmpty(count: 50);
@@ -91,7 +97,7 @@ class CatalogViewState extends State<CatalogView> {
           },
         ),
         IconButton(
-          tooltip: 'Delete all',
+          tooltip: AppLocalizations.of(context).deleteAll,
           icon: const Icon(Icons.delete_forever),
           onPressed: () async {
             await repo.deleteAll();

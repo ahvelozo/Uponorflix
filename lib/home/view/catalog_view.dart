@@ -18,6 +18,7 @@ class CatalogView extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           const SliverAppBar(
+            iconTheme: IconThemeData(color: Colors.white),
             floating: true,
             snap: true,
             backgroundColor: Colors.transparent,

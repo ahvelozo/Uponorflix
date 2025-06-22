@@ -30,7 +30,7 @@ class CatalogCubit extends Cubit<CatalogState> {
 
   /*── Recent gallery ─*/
   Future<void> _fetchRecent() async {
-    final recentEntities = await _repository.fetchPage(page: 0, limit: 5);
+    final recentEntities = await _repository.fetchPage(page: 0, limit: 10);
     emit(state.copyWith(recent: recentEntities.toViewModels()));
   }
 

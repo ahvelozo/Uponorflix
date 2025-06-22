@@ -22,13 +22,14 @@ class VideoEntityAdapter extends TypeAdapter<VideoEntity> {
       year: fields[2] as int,
       thumbnailUrl: fields[3] as String,
       type: fields[4] as CatalogTypeHive,
+      createdAt: fields[5] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, VideoEntity obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class VideoEntityAdapter extends TypeAdapter<VideoEntity> {
       ..writeByte(3)
       ..write(obj.thumbnailUrl)
       ..writeByte(4)
-      ..write(obj.type);
+      ..write(obj.type)
+      ..writeByte(5)
+      ..write(obj.createdAt);
   }
 
   @override

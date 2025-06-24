@@ -18,6 +18,9 @@ Future<void> main() async {
     },
     appRunner: () async {
       WidgetsFlutterBinding.ensureInitialized();
+      await Sentry.captureMessage(
+        'App started in production',
+      );
       final videoLocalStorage = VideoLocalStorage();
       var path = '';
       if (!kIsWeb) {

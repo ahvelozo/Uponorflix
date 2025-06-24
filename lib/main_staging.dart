@@ -18,6 +18,10 @@ Future<void> main() async {
     },
     appRunner: () async {
       WidgetsFlutterBinding.ensureInitialized();
+      WidgetsFlutterBinding.ensureInitialized();
+      await Sentry.captureMessage(
+        'App started in staging',
+      );
       final videoLocalStorage = VideoLocalStorage();
       var path = '';
       if (!kIsWeb) {
